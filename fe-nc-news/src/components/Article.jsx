@@ -21,7 +21,7 @@ class Article extends Component {
         <div>
           <h2>{article.title}</h2>
           <p>{article.body}</p>
-          <p>Topic {article.topic}</p>
+          <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
           <p>author {article.author}</p>
           <p>Comments {article.created_at}</p>
           <p>Votes: {article.votes}</p>
