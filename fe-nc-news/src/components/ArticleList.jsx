@@ -8,10 +8,19 @@ class ArticleList extends Component {
   };
 
   componentDidMount() {
-    makeApiRequests("articles/").then(({ articles }) => {
-      let articlesData = articles.map(article => article);
-      this.setState({ allArticles: articlesData });
-    });
+    if (this.props.topic) {
+      makeApiRequests(`articles/?topic=${this.props.topic}`).then(
+        ({ articles }) => {
+          const articlesData = articles.map(article => article);
+          this.setState({ allArticles: articlesData });
+        }
+      );
+    } else {
+      makeApiRequests("articles/").then(({ articles }) => {
+        const articlesData = articles.map(article => article);
+        this.setState({ allArticles: articlesData });
+      });
+    }
   }
 
   render() {
