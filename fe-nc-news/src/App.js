@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import "./App.css";
 import ArticleList from "./components/ArticleList";
 import Article from "./components/Article";
+import ArticleComments from "./components/ArticleComments";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <Router>
         <ArticleList path="/" />
         <ArticleList path="/topics/:topic" />
-        <Article path="/articles/:article_id" />
+        <Article path="/articles/:article_id/" />
+        <ArticleComments path="/articles/:article_id/comments" />
       </Router>
     </div>
   );
