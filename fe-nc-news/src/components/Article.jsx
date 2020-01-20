@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import makeApiRequests from "../utils/api";
+import CommentForm from "./CommentForm";
 
 class Article extends Component {
   state = {
@@ -28,6 +29,7 @@ class Article extends Component {
           <Link to={"comments"}>
             <button> Show {article.comment_count} comments</button>
           </Link>
+          <CommentForm article_id={article.article_id} />
         </div>
       );
     } else return null;

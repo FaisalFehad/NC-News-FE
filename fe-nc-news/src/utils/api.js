@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const makeApiRequests = url => {
+export const makeApiRequests = url => {
   return axios
     .get(`https://nc-news2020.herokuapp.com/api/${url}`)
     .then(({ data }) => {
