@@ -1,4 +1,5 @@
 import React from "react";
+import { Router } from "@reach/router";
 import Title from "./components/Title";
 import Navbar from "./components/Navbar";
 import "./App.css";
@@ -9,7 +10,9 @@ function App() {
     <div className="App">
       <Title />
       <Navbar />
-      <ArticleList />
+      <Router>
+        <ArticleList path="/" />
+      </Router>
     </div>
   );
 }
