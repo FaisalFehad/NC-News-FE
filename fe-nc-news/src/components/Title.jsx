@@ -1,11 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
 
-const Title = () => {
-  return (
-    <div>
-      <h2>NC News</h2>
-    </div>
-  );
-};
+class Title extends Component {
+  state = {
+    username: "Baby Shark"
+  };
+  render() {
+    return (
+      <header>
+        <h1>NC News</h1>
+        Logged In As: {this.state.username}
+      </header>
+    );
+  }
+}
 
 export default Title;
