@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Router } from "@reach/router";
 import Title from "./components/Title";
 import Navbar from "./components/Navbar";
@@ -7,19 +7,25 @@ import ArticleList from "./components/ArticleList";
 import Article from "./components/Article";
 import ArticleComments from "./components/ArticleComments";
 
-function App() {
-  return (
-    <div className="App">
-      <Title />
-      <Navbar />
-      <Router>
-        <ArticleList path="/" />
-        <ArticleList path="/topics/:topic" />
-        <Article path="/articles/:article_id/" />
-        <ArticleComments path="/articles/:article_id/comments" />
-      </Router>
-    </div>
-  );
+class App extends Component {
+  state = {
+    username: "BabyShark"
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <Title username={this.state.username} />
+        <Navbar />
+        <Router>
+          <ArticleList path="/" />
+          <ArticleList path="/topics/:topic" />
+          <Article path="/articles/:article_id/" />
+          <ArticleComments path="/articles/:article_id/comments" />
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
