@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "@reach/router";
 import makeApiRequests from "../utils/api";
 
 class Article extends Component {
@@ -23,8 +24,10 @@ class Article extends Component {
           <p>Topic {article.topic}</p>
           <p>author {article.author}</p>
           <p>Comments {article.created_at}</p>
-          <p>Comments {article.comment_count}</p>
           <p>Votes: {article.votes}</p>
+          <Link to={"comments"}>
+            <button> Show {article.comment_count} comments</button>
+          </Link>
         </div>
       );
     } else return null;
