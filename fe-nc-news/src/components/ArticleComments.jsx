@@ -30,7 +30,6 @@ class ArticleComments extends Component {
   };
 
   handleDeleteComment = comment_id => {
-    console.dir("deleting comment...");
     deleteCommentReq(`comments/${comment_id}`);
   };
 

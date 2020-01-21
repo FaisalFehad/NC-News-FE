@@ -8,16 +8,13 @@ class CommentForm extends Component {
 
   handleChange = event => {
     this.setState({ bodyInput: event.target.value });
-    console.log(event.target.value, "<<<handling change");
   };
 
   handleSubmit = event => {
     event.preventDefault();
     const { bodyInput } = this.state;
     const { article_id } = this.props;
-    postComment(article_id, bodyInput).then(postedComment => {
-      console.log(postedComment, "<<<<< posted comment");
-    });
+    postComment(article_id, bodyInput).then(postedComment => {});
   };
 
   render() {
