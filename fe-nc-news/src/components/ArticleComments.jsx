@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import makeApiRequests from "../utils/api";
+import deleteCommentReq from "../utils/deleteCommentReq";
 
 class ArticleComments extends Component {
   state = {
     comments: [],
-    sortBy: "created_at"
+    sortBy: "created_at",
+    loggedInUser: "butter_bridge"
   };
 
   componentDidMount() {
@@ -15,9 +17,7 @@ class ArticleComments extends Component {
   }
 
   componentDidUpdate() {
-    // /api/articles/1/comments?sort_by=something
     const { article_id } = this.props;
-
     makeApiRequests(
       `articles/${article_id}/comments?sort_by=${this.state.sortBy}`
     ).then(comments => {
@@ -27,6 +27,11 @@ class ArticleComments extends Component {
 
   handleSortByByChange = ({ target: { value } }) => {
     this.setState({ sortBy: value });
+  };
+
+  handleDeleteComment = comment_id => {
+    console.dir("deleting comment...");
+    deleteCommentReq(`comments/${comment_id}`);
   };
 
   render() {
@@ -58,6 +63,16 @@ class ArticleComments extends Component {
                 <hr />
                 <br />
                 <p>Body: {comment.body}</p>
+                {this.state.loggedInUser === comment.username && (
+                  <button
+                    onClick={event =>
+                      this.handleDeleteComment(comment.comment_id)
+                    }
+                  >
+                    {" "}
+                    Delete Comment{" "}
+                  </button>
+                )}
                 <p>Username: {comment.username}</p>
                 <p>Votes: {comment.votes}</p>
                 <p>Created at: {comment.created_at}</p>
@@ -66,7 +81,6 @@ class ArticleComments extends Component {
               </>
             );
           })}
-          ;
         </>
       );
     } else return null;

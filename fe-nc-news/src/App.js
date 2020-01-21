@@ -9,7 +9,7 @@ import ArticleComments from "./components/ArticleComments";
 
 class App extends Component {
   state = {
-    username: "BabyShark"
+    username: "butter_bridge"
   };
 
   render() {

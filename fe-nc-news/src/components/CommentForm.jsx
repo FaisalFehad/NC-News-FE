@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import postComment from "../utils/postComment";
+import postComment from "../utils/postCommentReq";
 
 class CommentForm extends Component {
   state = {
