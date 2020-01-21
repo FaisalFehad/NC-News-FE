@@ -6,6 +6,7 @@ import "./App.css";
 import ArticleList from "./components/ArticleList";
 import Article from "./components/Article";
 import ArticleComments from "./components/ArticleComments";
+import Vote from "./components/Vote";
 
 class App extends Component {
   state = {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "@reach/router";
 import makeApiRequests from "../utils/api";
 import CommentForm from "./CommentForm";
+import Vote from "./Vote";
 
 class Article extends Component {
   state = {
@@ -25,10 +26,10 @@ class Article extends Component {
           <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
           <p>author {article.author}</p>
           <p>Created at {article.created_at}</p>
-          <p>Votes: {article.votes}</p>
           <Link to={"comments"}>
             <button> Show {article.comment_count} comments</button>
           </Link>
+          <Vote article_id={article.article_id} currentVote={article.votes} />
           <CommentForm article_id={article.article_id} />
         </div>
       );
