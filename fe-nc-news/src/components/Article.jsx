@@ -29,7 +29,11 @@ class Article extends Component {
           <Link to={"comments"}>
             <button> Show {article.comment_count} comments</button>
           </Link>
-          <Vote article_id={article.article_id} currentVote={article.votes} />
+          <Vote
+            id={article.article_id}
+            currentVote={article.votes}
+            path={"articles"}
+          />
           <CommentForm article_id={article.article_id} />
         </div>
       );

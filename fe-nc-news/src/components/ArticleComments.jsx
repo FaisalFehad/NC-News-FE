@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import makeApiRequests from "../utils/api";
 import deleteCommentReq from "../utils/deleteCommentReq";
+import Vote from "./Vote";
 
 class ArticleComments extends Component {
   state = {
@@ -73,10 +74,13 @@ class ArticleComments extends Component {
                   </button>
                 )}
                 <p>Username: {comment.username}</p>
-                <p>Votes: {comment.votes}</p>
                 <p>Created at: {comment.created_at}</p>
                 <br />
-                <hr />
+                <Vote
+                  id={comment.comment_id}
+                  currentVote={comment.votes}
+                  path={"comments"}
+                />
               </>
             );
           })}
