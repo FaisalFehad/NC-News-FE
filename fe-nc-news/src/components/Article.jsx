@@ -24,7 +24,7 @@ class Article extends Component {
           <p>{article.body}</p>
           <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
           <p>author {article.author}</p>
-          <p>Comments {article.created_at}</p>
+          <p>Created at {article.created_at}</p>
           <p>Votes: {article.votes}</p>
           <Link to={"comments"}>
             <button> Show {article.comment_count} comments</button>
