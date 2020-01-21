@@ -3,16 +3,18 @@ import { Link } from "@reach/router";
 import makeApiRequests from "../utils/api";
 import CommentForm from "./CommentForm";
 import Vote from "./Vote";
+import Loading from "./Loading";
 
 class Article extends Component {
   state = {
-    article: ""
+    article: "",
+    loading: true
   };
 
   componentDidMount() {
     const { article_id } = this.props;
     makeApiRequests(`articles/${article_id}`).then(article => {
-      this.setState({ article });
+      this.setState({ article, loading: false });
     });
   }
 
@@ -37,7 +39,7 @@ class Article extends Component {
           <CommentForm article_id={article.article_id} />
         </div>
       );
-    } else return null;
+    } else return <Loading msg={"Just getting you that amazing article"} />;
   }
 }
 

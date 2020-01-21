@@ -2,18 +2,20 @@ import React, { Component } from "react";
 import makeApiRequests from "../utils/api";
 import deleteCommentReq from "../utils/deleteCommentReq";
 import Vote from "./Vote";
+import Loading from "./Loading";
 
 class ArticleComments extends Component {
   state = {
     comments: [],
     sortBy: "created_at",
-    loggedInUser: "butter_bridge"
+    loggedInUser: "butter_bridge",
+    loading: true
   };
 
   componentDidMount() {
     const { article_id } = this.props;
     makeApiRequests(`articles/${article_id}/comments`).then(comments => {
-      this.setState({ comments });
+      this.setState({ comments, loading: false });
     });
   }
 
@@ -86,7 +88,7 @@ class ArticleComments extends Component {
           })}
         </>
       );
-    } else return null;
+    } else return <Loading msg={"Cool comments are on their way!"} />;
   }
 }
 
