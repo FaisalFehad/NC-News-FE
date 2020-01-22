@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import updateArticleVoteReq from "../utils/updateVoteReq";
 
 class Vote extends Component {
-  state = { vote: 0 };
+  state = { currentVote: 0, voteValue: 0 };
 
   handleVote = num => {
     this.setState(currentState => {
-      return { vote: currentState.vote + num };
+      return {
+        currentVote: currentState.currentVote + num,
+        voteValue: currentState.voteValue + num
+      };
     });
     const { path, id } = this.props;
     updateArticleVoteReq(id, num, path);
@@ -14,16 +17,20 @@ class Vote extends Component {
 
   componentDidMount() {
     const { currentVote } = this.props;
-    this.setState({ vote: currentVote });
+    this.setState({ currentVote });
   }
 
   render() {
     return (
       <div>
-        <h3>Votes: {this.state.vote}</h3>
+        <h3>Votes: {this.state.currentVote}</h3>
         <br />
-        <button onClick={event => this.handleVote(1)}>Up Vote!</button>
-        <button onClick={event => this.handleVote(-1)}>Down Vote!</button>
+        {this.state.voteValue <= 0 && (
+          <button onClick={event => this.handleVote(1)}>Up Vote!</button>
+        )}
+        {this.state.voteValue >= 0 && (
+          <button onClick={event => this.handleVote(-1)}>Down Vote!</button>
+        )}
         <br />
       </div>
     );
