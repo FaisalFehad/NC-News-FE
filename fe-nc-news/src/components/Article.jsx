@@ -4,18 +4,28 @@ import makeApiRequests from "../utils/api";
 import CommentForm from "./CommentForm";
 import Vote from "./Vote";
 import Loading from "./Loading";
+import ErrDisplay from "./ErrDisplay";
 
 class Article extends Component {
   state = {
     article: "",
-    loading: true
+    loading: true,
+    err: null,
+    err_msg: ""
   };
 
   componentDidMount() {
     const { article_id } = this.props;
-    makeApiRequests(`articles/${article_id}`).then(article => {
-      this.setState({ article, loading: false });
-    });
+    makeApiRequests(`articles/${article_id}`)
+      .then(article => {
+        this.setState({ article, loading: false });
+      })
+      .catch(() => {
+        this.setState({
+          err: true,
+          err_msg: "Ops this article dose not exist 💩 404"
+        });
+      });
   }
 
   render() {
@@ -39,7 +49,9 @@ class Article extends Component {
           <CommentForm article_id={article.article_id} />
         </div>
       );
-    } else return <Loading msg={"Just getting you that amazing article"} />;
+    } else if (this.state.err)
+      return <ErrDisplay err_msg={this.state.err_msg} />;
+    else return <Loading err_msg={"Just getting you that amazing article"} />;
   }
 }
 
