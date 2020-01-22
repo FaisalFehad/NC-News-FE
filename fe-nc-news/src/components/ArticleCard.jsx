@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
+import Vote from "./Vote";
 
 const ArticleCard = ({ allArticles }) => {
   if (allArticles) {
@@ -11,9 +12,13 @@ const ArticleCard = ({ allArticles }) => {
             <Link to={`articles/${article.article_id}`}>{article.title}</Link>
           </h3>
           <h3>
-            <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
+            <Link to={`/topics/${article.topic}`}>Topic {article.topic}</Link>
           </h3>
-          <h3>Votes: {article.votes}</h3>
+          <Vote
+            id={article.article_id}
+            currentVote={article.votes}
+            path={"articles"}
+          />
           <hr />
         </main>
       );
