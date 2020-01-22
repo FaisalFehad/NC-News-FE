@@ -15,7 +15,7 @@ class CommentForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.setState({ posting: true });
+    this.setState({ posting: true, bodyInput: "" });
     const { bodyInput } = this.state;
     const { article_id } = this.props;
     postComment(article_id, bodyInput).then(postedComment => {

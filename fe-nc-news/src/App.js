@@ -21,6 +21,7 @@ class App extends Component {
         <Router>
           <ArticleList path="/" />
           <ArticleList path="/topics/:topic" />
+          <ArticleList path="/articles/" />
           <Article path="/articles/:article_id/" />
           <ArticleComments path="/articles/:article_id/comments" />
           <ErrDisplay default />
