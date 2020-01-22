@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import postComment from "../utils/postCommentReq";
+import NoticeMsgDisplay from "./NoticeMsgDisplay";
 
 class CommentForm extends Component {
   state = {
-    bodyInput: ""
+    bodyInput: "",
+    postedComment: null,
+    posting: null
   };
 
   handleChange = event => {
@@ -12,14 +15,23 @@ class CommentForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.setState({ posting: true });
     const { bodyInput } = this.state;
     const { article_id } = this.props;
-    postComment(article_id, bodyInput).then(postedComment => {});
+    postComment(article_id, bodyInput).then(postedComment => {
+      this.setState({ postedComment, posting: null });
+    });
   };
 
   render() {
     return (
       <ul>
+        {this.state.postedComment && (
+          <NoticeMsgDisplay
+            msg={`"${this.state.postedComment.comment.body}" has been posted!`}
+          />
+        )}
+
         <form onSubmit={this.handleSubmit}>
           <label name="studentName">
             Comment Body:
@@ -30,7 +42,7 @@ class CommentForm extends Component {
               id="comment"
             />
           </label>
-          <button>Add Comment</button>
+          {!this.state.posting && <button>Add Comment</button>}
         </form>
       </ul>
     );
