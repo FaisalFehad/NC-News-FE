@@ -4,6 +4,7 @@ import deleteCommentReq from "../utils/deleteCommentReq";
 import Vote from "./Vote";
 import Loading from "./Loading";
 import ErrDisplay from "./ErrDisplay";
+import NoticeMsgDisplay from "./NoticeMsgDisplay";
 
 class ArticleComments extends Component {
   state = {
@@ -12,7 +13,9 @@ class ArticleComments extends Component {
     loggedInUser: "butter_bridge",
     loading: true,
     err: false,
-    err_msg: ""
+    err_msg: "",
+    deletingComment: false,
+    commentDeleted: false
   };
 
   componentDidMount() {
@@ -36,13 +39,18 @@ class ArticleComments extends Component {
   };
 
   handleDeleteComment = comment_id => {
-    deleteCommentReq(`comments/${comment_id}`).catch(() => {
-      this.setState({
-        loading: false,
-        err: true,
-        err_msg: "The comment you trying to delete is no longer exist 🙅‍♀️"
+    this.setState({ commentDeleted: false, deletingComment: true });
+    deleteCommentReq(`comments/${comment_id}`)
+      .then(() => {
+        this.setState({ commentDeleted: true, deletingComment: false });
+      })
+      .catch(() => {
+        this.setState({
+          loading: false,
+          err: true,
+          err_msg: "The comment you trying to delete is no longer exist 🙅‍♀️"
+        });
       });
-    });
   };
 
   render() {
@@ -54,37 +62,39 @@ class ArticleComments extends Component {
       if (this.state.err) return <ErrDisplay err_msg={this.state.err_msg} />;
       return (
         <>
-          <div>
-            <form>
-              <label>
-                Sort comments by:
-                <select
-                  value={this.state.value}
-                  onChange={this.handleSortByByChange}
-                >
-                  <option value="created_at">Date Created</option>
-                  <option value="username">Author</option>
-                  <option value="votes"> Comment Votes</option>
-                </select>
-              </label>
-            </form>
-          </div>
+          {this.state.commentDeleted && (
+            <NoticeMsgDisplay msg={"The comment has been deleted!"} />
+          )}
+          <form>
+            <label>
+              Sort comments by:
+              <select
+                value={this.state.value}
+                onChange={this.handleSortByByChange}
+              >
+                <option value="created_at">Date Created</option>
+                <option value="username">Author</option>
+                <option value="votes"> Comment Votes</option>
+              </select>
+            </label>
+          </form>
           {comments.map(comment => {
             return (
               <>
                 <hr />
                 <br />
                 <p>Body: {comment.body}</p>
-                {this.state.loggedInUser === comment.username && (
-                  <button
-                    onClick={event =>
-                      this.handleDeleteComment(comment.comment_id)
-                    }
-                  >
-                    {" "}
-                    Delete Comment{" "}
-                  </button>
-                )}
+                {!this.state.deletingComment &&
+                  this.state.loggedInUser === comment.username && (
+                    <button
+                      onClick={event =>
+                        this.handleDeleteComment(comment.comment_id)
+                      }
+                    >
+                      {" "}
+                      Delete Comment{" "}
+                    </button>
+                  )}
                 <p>Username: {comment.username}</p>
                 <p>Created at: {comment.created_at}</p>
                 <br />
