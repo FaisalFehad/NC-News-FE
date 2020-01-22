@@ -3,13 +3,16 @@ import makeApiRequests from "../utils/api";
 import deleteCommentReq from "../utils/deleteCommentReq";
 import Vote from "./Vote";
 import Loading from "./Loading";
+import ErrDisplay from "./ErrDisplay";
 
 class ArticleComments extends Component {
   state = {
     comments: [],
     sortBy: "created_at",
     loggedInUser: "butter_bridge",
-    loading: true
+    loading: true,
+    err: false,
+    err_msg: ""
   };
 
   componentDidMount() {
@@ -33,7 +36,13 @@ class ArticleComments extends Component {
   };
 
   handleDeleteComment = comment_id => {
-    deleteCommentReq(`comments/${comment_id}`);
+    deleteCommentReq(`comments/${comment_id}`).catch(() => {
+      this.setState({
+        loading: false,
+        err: true,
+        err_msg: "The comment you trying to delete is no longer exist 🙅‍♀️"
+      });
+    });
   };
 
   render() {
@@ -42,6 +51,7 @@ class ArticleComments extends Component {
     } = this.state;
 
     if (comments) {
+      if (this.state.err) return <ErrDisplay err_msg={this.state.err_msg} />;
       return (
         <>
           <div>
