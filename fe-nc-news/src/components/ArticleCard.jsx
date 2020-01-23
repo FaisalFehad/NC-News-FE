@@ -9,7 +9,7 @@ const ArticleCard = ({ allArticles }) => {
         <main key={article.article_id}>
           <hr />
           <h3>
-            <Link to={`articles/${article.article_id}`}>{article.title}</Link>
+            <Link to={`/articles/${article.article_id}`}>{article.title}</Link>
           </h3>
           <h4>
             <Link to={`/topics/${article.topic}`}>Topic {article.topic}</Link>
