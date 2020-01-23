@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import postComment from "../utils/postCommentReq";
 import NoticeMsgDisplay from "./NoticeMsgDisplay";
+import { Button } from "react-bootstrap";
 
 class CommentForm extends Component {
   state = {
@@ -14,6 +15,8 @@ class CommentForm extends Component {
   };
 
   handleSubmit = event => {
+    console.log("123");
+
     event.preventDefault();
     this.setState({ posting: true, bodyInput: "" });
     const { bodyInput } = this.state;
@@ -33,17 +36,23 @@ class CommentForm extends Component {
         )}
 
         <form onSubmit={this.handleSubmit}>
-          <label name="studentName">
-            <br />
-            Write your comment 🔥
-            <input
+          <div class="form-group">
+            <textarea
+              placeholder="Write a comment 🔥"
               type="text"
               onChange={this.handleChange}
               value={this.state.bodyInput}
               id="comment"
-            />
-          </label>
-          {!this.state.posting && <button>Add Comment ▶︎ </button>}
+              className="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+            ></textarea>
+          </div>
+          {!this.state.posting && (
+            <button className="btn btn-outline-secondary">
+              Add Comment ▶︎
+            </button>
+          )}
         </form>
       </ul>
     );
