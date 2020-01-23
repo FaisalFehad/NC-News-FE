@@ -7,6 +7,7 @@ import ArticleList from "./components/ArticleList";
 import Article from "./components/Article";
 import ArticleComments from "./components/ArticleComments";
 import ErrDisplay from "./components/ErrDisplay";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
   state = {
