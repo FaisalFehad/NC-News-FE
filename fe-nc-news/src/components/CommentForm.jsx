@@ -34,7 +34,8 @@ class CommentForm extends Component {
 
         <form onSubmit={this.handleSubmit}>
           <label name="studentName">
-            Comment Body:
+            <br />
+            Write your comment 🔥
             <input
               type="text"
               onChange={this.handleChange}
@@ -42,7 +43,7 @@ class CommentForm extends Component {
               id="comment"
             />
           </label>
-          {!this.state.posting && <button>Add Comment</button>}
+          {!this.state.posting && <button>Add Comment ▶︎ </button>}
         </form>
       </ul>
     );

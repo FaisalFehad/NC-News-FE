@@ -23,13 +23,12 @@ class Vote extends Component {
   render() {
     return (
       <div>
-        <h3>Votes: {this.state.currentVote}</h3>
-        <br />
+        <h4>Votes: {this.state.currentVote}</h4>
         {this.state.voteValue <= 0 && (
-          <button onClick={event => this.handleVote(1)}>Up Vote!</button>
+          <button onClick={event => this.handleVote(1)}>Up Vote 👍</button>
         )}
         {this.state.voteValue >= 0 && (
-          <button onClick={event => this.handleVote(-1)}>Down Vote!</button>
+          <button onClick={event => this.handleVote(-1)}>Down Vote 👎</button>
         )}
         <br />
       </div>

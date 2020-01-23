@@ -33,13 +33,13 @@ class Article extends Component {
     if (article) {
       return (
         <div>
-          <h2>{article.title}</h2>
+          <h3>{article.title}</h3>
           <p>{article.body}</p>
           <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
-          <p>author {article.author}</p>
+          <p>Author {article.author}</p>
           <p>Created at {article.created_at}</p>
           <Link to={"comments"}>
-            <button> Show {article.comment_count} comments</button>
+            <button> Show {article.comment_count} comments 👀</button>
           </Link>
           <Vote
             id={article.article_id}
