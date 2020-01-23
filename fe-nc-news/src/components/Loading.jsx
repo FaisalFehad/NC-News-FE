@@ -2,8 +2,8 @@ import React from "react";
 
 const Loading = ({ msg }) => {
   return (
-    <div>
-      <h3> {`${msg}...`} </h3>
+    <div class="alert alert-info">
+      <strong>Loading!</strong> {msg && <h4>{msg}</h4>}
     </div>
   );
 };
