@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import postComment from "../utils/postCommentReq";
 import NoticeMsgDisplay from "./NoticeMsgDisplay";
-import { Button } from "react-bootstrap";
 
 class CommentForm extends Component {
   state = {
